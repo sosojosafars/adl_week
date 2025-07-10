@@ -120,7 +120,7 @@ const frase = fraseSelecionada!
             <Button onClick={onBack} variant="ghost" className="text-gray-800 hover:bg-gray-100 mr-4">
               <ArrowLeft className="w-6 h-6" />
             </Button>
-            <h1 className="text-4xl font-bold text-red-800 text-center">QUEM É A PESSOA?</h1>
+            <h1 className="text-4xl font-bold text-red-800 text-center">Tá na Bíblia ou Tá Amarrado?</h1>
           </div>
   
           <Card className="w-full max-w-2xl bg-white border-4 border-red-500">
