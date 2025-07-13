@@ -94,15 +94,15 @@ const pessoas: Pessoa[] = [
   {
     id: 12,
     nome: "Samuel Mitt",
-    fragmentoUrl: "/imagens/samuel1.jpg",
-    fotoCompletaUrl: "/imagens/samuel.jpg",
+    fragmentoUrl: "/imagens/Samuel1.jpg",
+    fotoCompletaUrl: "/imagens/Samuel.jpg",
     resposta: 0,
   },
   {
     id: 13,
     nome: "Carol Mitt",
-    fragmentoUrl: "/imagens/carol1.jpg",
-    fotoCompletaUrl: "/imagens/carol.jpg",
+    fragmentoUrl: "/imagens/Carol1.jpg",
+    fotoCompletaUrl: "/imagens/Carol.jpg",
     resposta: 0,
   },
   {
