@@ -120,10 +120,10 @@ const frase = fraseSelecionada!
             <Button onClick={onBack} variant="ghost" className="text-gray-800 hover:bg-gray-100 mr-4">
               <ArrowLeft className="w-6 h-6" />
             </Button>
-            <h1 className="text-4xl font-bold text-red-800 text-center">Tá na Bíblia ou Tá Amarrado?</h1>
+            <h1 className="text-4xl font-bold text-blue-800 text-center">Tá na Bíblia ou Tá Amarrado?</h1>
           </div>
   
-          <Card className="w-full max-w-2xl bg-white border-4 border-red-500">
+          <Card className="w-full max-w-2xl bg-white border-4 border-white-500">
             <CardContent className="p-8">
               <div className="grid grid-cols-5 gap-4">
                 {frases.map((frase) => (
@@ -133,7 +133,7 @@ const frase = fraseSelecionada!
                     className={`w-16 h-16 rounded-full border-4 flex items-center justify-center text-xl font-bold transition-all hover:scale-110 ${
                       frasesAcertadas.has(frase.id)
                         ? "bg-green-500 text-white border-green-600 shadow-lg"
-                        : "bg-white text-red-800 border-red-400 hover:border-red-600 hover:text-red-600"
+                        : "bg-white text-blue-800 border-blue-400 hover:border-blue-600 hover:text-blue-600"
                     }`}
                     disabled={frasesAcertadas.has(frase.id)}
                   >
@@ -147,49 +147,11 @@ const frase = fraseSelecionada!
       )
     }
 
-  if (jogoTerminado) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen space-y-8">
-        <Card className="w-full max-w-2xl bg-white border-4 border-blue-500">
-          <CardHeader className="text-center">
-            <Quote className="w-16 h-16 text-blue-600 mx-auto mb-4" />
-            <CardTitle className="text-3xl text-blue-800">Jogo Finalizado!</CardTitle>
-          </CardHeader>
-          <CardContent className="text-center space-y-6">
-            <div className="text-6xl font-bold text-blue-600">
-              {pontuacao}/{frases.length}
-            </div>
-            <p className="text-xl text-gray-700">
-              {pontuacao === frases.length
-                ? "Perfeito! Você conhece muito bem a Bíblia!"
-                : pontuacao >= frases.length * 0.7
-                  ? "Muito bem! Você sabe distinguir bem!"
-                  : pontuacao >= frases.length * 0.5
-                    ? "Bom trabalho! Continue estudando!"
-                    : "Continue lendo a Bíblia para conhecer melhor!"}
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Button onClick={reiniciarJogo} className="bg-blue-600 hover:bg-blue-700">
-                Jogar Novamente
-              </Button>
-              <Button
-                onClick={onBack}
-                variant="outline"
-                className="border-blue-500 text-blue-600 hover:bg-blue-50 bg-transparent"
-              >
-                Voltar ao Menu
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    )
-  }
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen space-y-8">
       <div className="flex items-center mb-8">
-        <Button onClick={onBack} variant="ghost" className="text-gray-800 hover:bg-gray-100 mr-4">
+        <Button onClick={() => setFraseSelecionada(null)}
+           variant="ghost" className="text-gray-800 hover:bg-gray-100 mr-4">
           <ArrowLeft className="w-6 h-6" />
         </Button>
         <h1 className="text-4xl font-bold text-blue-800 text-center drop-shadow-lg">Tá na Bíblia ou Tá Amarrado?</h1>
@@ -206,40 +168,29 @@ const frase = fraseSelecionada!
 
           {mostrarResultado && (
             <div
-              className={`p-6 rounded-lg border-4 ${frase.eVerdadeira ? "bg-green-50 border-green-500" : "bg-red-50 border-red-500"}`}
+              className={`p-6 rounded-lg border-4 ${frase.eVerdadeira ? "bg-green-50 border-green-500" : "bg-blue-50 border-blue-500"}`}
             >
               <div className="flex items-center justify-center mb-4">
                 {frase.eVerdadeira ? (
                   <CheckCircle className="w-8 h-8 text-green-600 mr-2" />
                 ) : (
-                  <XCircle className="w-8 h-8 text-red-600 mr-2" />
+                  <XCircle className="w-8 h-8 text-blue-600 mr-2" />
                 )}
-                <span className={`text-xl font-bold ${frase.eVerdadeira ? "text-green-800" : "text-red-800"}`}>
+                <span className={`text-xl font-bold ${frase.eVerdadeira ? "text-green-800" : "text-blue-800"}`}>
                   {frase.eVerdadeira ? "TÁ NA BÍBLIA!" : "TÁ AMARRADO!"}
                 </span>
               </div>
-              <p className={`text-center ${frase.eVerdadeira ? "text-green-700" : "text-red-700"}`}>
+              <p className={`text-center ${frase.eVerdadeira ? "text-green-700" : "text-blue-700"}`}>
                 {frase.explicacao}
               </p>
             </div>
           )}
 
           {!mostrarResultado && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Button
-                onClick={() => handleResposta(true)}
-                className="p-8 text-xl bg-green-600 hover:bg-green-700 h-auto"
-              >
-                <div className="flex flex-col items-center">
-                  <CheckCircle className="w-8 h-8 mb-2" />
-                  <span>TÁ NA BÍBLIA</span>
-                </div>
-              </Button>
-
-              <Button onClick={() => handleResposta(false)} className="p-8 text-xl bg-red-600 hover:bg-red-700 h-auto">
-                <div className="flex flex-col items-center">
-                  <XCircle className="w-8 h-8 mb-2" />
-                  <span>TÁ AMARRADO</span>
+            <div className="grid grid-cols-1">
+              <Button onClick={() => handleResposta(false)} className="p-8 text-xl bg-blue-700 h-auto">
+                <div className="flex flex-col items-center w-25 h-30">
+                  <span>Mostrar Resposta</span>
                 </div>
               </Button>
             </div>

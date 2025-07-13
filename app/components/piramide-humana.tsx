@@ -60,10 +60,10 @@ export default function QuemEAPessoa({ onBack }: { onBack: () => void }) {
           <Button onClick={onBack} variant="ghost" className="text-gray-800 hover:bg-gray-100 mr-4">
             <ArrowLeft className="w-6 h-6" />
           </Button>
-          <h1 className="text-4xl font-bold text-red-800 text-center">PIRÂMIDE HUMANA</h1>
+          <h1 className="text-4xl font-bold text-yellow-800 text-center">PIRÂMIDE HUMANA</h1>
         </div>
 
-        <Card className="w-full max-w-2xl bg-white border-4 border-red-500">
+        <Card className="w-full max-w-2xl bg-white border-4 border-white-500">
           <CardContent className="p-8">
             <div className="grid grid-cols-5 gap-4">
               {pessoas.map((pessoa) => (
@@ -73,7 +73,7 @@ export default function QuemEAPessoa({ onBack }: { onBack: () => void }) {
                   className={`w-16 h-16 rounded-full border-4 flex items-center justify-center text-xl font-bold transition-all hover:scale-110 ${
                     pessoasAcertadas.has(pessoa.id)
                       ? "bg-green-500 text-white border-green-600 shadow-lg"
-                      : "bg-white text-red-800 border-red-400 hover:border-red-600 hover:text-red-600"
+                      : "bg-white text-yellow-800 border-yellow-400 hover:border-yellow-600 hover:text-yellow-600"
                   }`}
                   disabled={pessoasAcertadas.has(pessoa.id)}
                 >
@@ -97,7 +97,7 @@ export default function QuemEAPessoa({ onBack }: { onBack: () => void }) {
           </Button>
         </div>
 
-        <Card className="w-full max-w-md bg-white border-4 border-white-500">
+        <Card className="w-full max-w-md" style={{ width: 500, height: 500 }}>
           <CardContent className="p-6 text-center">
             <img
               src={pessoaSelecionada.fotoCompletaUrl || "/placeholder.svg"}
@@ -116,7 +116,7 @@ x          </CardContent>
         <Button onClick={voltarParaGrid} variant="ghost" className="text-gray-800 hover:bg-gray-100 mr-4">
           <ArrowLeft className="w-6 h-6" />
         </Button>
-        <h1 className="text-3xl font-bold text-red-800">Pirâmide #{pessoaSelecionada.id}</h1>
+        <h1 className="text-3xl font-bold text-yellow-800">Pirâmide #{pessoaSelecionada.id}</h1>
       </div>
 
       <Card >

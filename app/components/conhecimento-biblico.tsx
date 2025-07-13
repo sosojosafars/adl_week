@@ -30,7 +30,7 @@ const perguntasBiblicas: PerguntaBiblica[] = [
   {
     id: 4,
     pergunta: "Quem escreveu Hebreus?",
-    resposta: "Não se sabe ao certo, possivelmente Paulo",
+    resposta: "Paulo",
   },
   {
     id: 5,
@@ -75,7 +75,7 @@ export default function ConhecimentoBiblico({ onBack }: { onBack: () => void }) 
   
         <div className="text-gray-800 text-center mb-4"></div>
 
-        <Card className="w-full max-w-2xl bg-white border-4 border-yellow-500">
+        <Card className="w-full max-w-2xl bg-white border-4 border-white-500">
           <CardContent className="p-8">
             <div className="grid grid-cols-5 gap-4">
               {perguntasBiblicas.map((pergunta) => (

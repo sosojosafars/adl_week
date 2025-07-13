@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowLeft, Users, CheckCircle, XCircle, Eye, RotateCcw } from "lucide-react"
+import { ArrowLeft, Users, Eye } from "lucide-react"
 
 interface Pessoa {
   id: number
@@ -72,9 +72,9 @@ const pessoas: Pessoa[] = [
   },
   {
     id: 9,
-    nome: "david  Teixeira",
-    fragmentoUrl: "/imagens/david1.jpg",
-    fotoCompletaUrl: "/imagens/david.jpg",
+    nome: "Flávia Magalhães",
+    fragmentoUrl: "/imagens/flavia1.jpg",
+    fotoCompletaUrl: "/imagens/flavia.jpg",
     resposta: 0,
   },
   {
@@ -86,9 +86,9 @@ const pessoas: Pessoa[] = [
   },
   {
     id: 11,
-    nome: "Flávia Magalhães",
-    fragmentoUrl: "/imagens/flavia1.jpg",
-    fotoCompletaUrl: "/imagens/flavia.jpg",
+    nome: "Marcinho",
+    fragmentoUrl: "/imagens/marcinho1.jpg",
+    fotoCompletaUrl: "/imagens/marcinho.jpg",
     resposta: 0,
   },
   {
@@ -108,8 +108,8 @@ const pessoas: Pessoa[] = [
   {
     id: 14,
     nome: "Matheus Saad",
-    fragmentoUrl: "/imagens/matheus1.jpg",
-    fotoCompletaUrl: "/imagens/matheus.jpg",
+    fragmentoUrl: "/imagens/saad1.jpg",
+    fotoCompletaUrl: "/imagens/saad.jpg",
     resposta: 0,
   },
   {
@@ -124,33 +124,13 @@ const pessoas: Pessoa[] = [
 export default function QuemEAPessoa({ onBack }: { onBack: () => void }) {
   const [pessoaSelecionada, setPessoaSelecionada] = useState<Pessoa | null>(null)
   const [pessoasAcertadas, setPessoasAcertadas] = useState<Set<number>>(new Set())
-  const [mostrarResposta, setMostrarResposta] = useState(false)
-  const [respostaSelecionada, setRespostaSelecionada] = useState<number | null>(null)
   const [mostrarFotoCompleta, setMostrarFotoCompleta] = useState(false)
-  const [pontuacao, setPontuacao] = useState(0)
-
-  const [perguntaSelecionada, setPerguntaSelecionada] = useState<Pessoa | null>(null)
-    const [perguntasRespondidas, setPerguntasRespondidas] = useState<Set<number>>(new Set())
-
 
   const selecionarPessoa = (pessoa: Pessoa) => {
     if (pessoasAcertadas.has(pessoa.id)) return
     setPessoaSelecionada(pessoa)
-    setMostrarResposta(false)
-    setRespostaSelecionada(null)
     setMostrarFotoCompleta(false)
-  }
-
-  const handleResposta = (opcaoIndex: number) => {
-    if (respostaSelecionada !== null) return
-
-    setRespostaSelecionada(opcaoIndex)
-    setMostrarResposta(true)
-
-    if (opcaoIndex === pessoaSelecionada!.resposta) {
-      setPessoasAcertadas(new Set([...pessoasAcertadas, pessoaSelecionada!.id]))
-      setPontuacao(pontuacao + 1)
-    }
+    setPessoasAcertadas(new Set([...pessoasAcertadas, pessoa.id])) // Marca como respondida na seleção
   }
 
   const voltarParaGrid = () => {
@@ -158,8 +138,6 @@ export default function QuemEAPessoa({ onBack }: { onBack: () => void }) {
     setMostrarFotoCompleta(false)
   }
 
-
-  // Tela principal com grid de números
   if (!pessoaSelecionada) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen space-y-8">
@@ -170,9 +148,9 @@ export default function QuemEAPessoa({ onBack }: { onBack: () => void }) {
           <h1 className="text-4xl font-bold text-red-800 text-center">QUEM É A PESSOA?</h1>
         </div>
 
-        <Card className="w-full max-w-2xl bg-white border-4 border-red-500">
+        <Card className="w-full max-w-2xl bg-white border-4 border-white-500 text-center">
           <CardContent className="p-8">
-            <div className="grid grid-cols-5 gap-4">
+            <div className="grid grid-cols-5 gap-4 ">
               {pessoas.map((pessoa) => (
                 <button
                   key={pessoa.id}
@@ -194,7 +172,6 @@ export default function QuemEAPessoa({ onBack }: { onBack: () => void }) {
     )
   }
 
-  // Tela de visualização da foto completa
   if (mostrarFotoCompleta) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen space-y-8">
@@ -219,9 +196,8 @@ export default function QuemEAPessoa({ onBack }: { onBack: () => void }) {
     )
   }
 
-  // Tela do jogo individual
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen space-y-8">
+    <div className="flex flex-col items-center space-y-8">
       <div className="flex items-center mb-8">
         <Button onClick={voltarParaGrid} variant="ghost" className="text-gray-800 hover:bg-gray-100 mr-4">
           <ArrowLeft className="w-6 h-6" />
@@ -229,24 +205,25 @@ export default function QuemEAPessoa({ onBack }: { onBack: () => void }) {
         <h1 className="text-3xl font-bold text-red-800">Pessoa #{pessoaSelecionada.id}</h1>
       </div>
 
-      <Card className="w-full max-w-2xl bg-white border-4 border-red-500">
+      <Card className="w-full max-w-2xl bg-white border-4 border-white-500 justify-center">
         <CardHeader className="text-center">
           <Users className="w-12 h-12 text-red-600 mx-auto mb-4" />
           <CardTitle className="text-2xl text-red-800">Quem é esta pessoa?</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Fragmento da foto */}
+        <CardContent className="flex justify-center">
           <div className="flex justify-center">
-            <div className="relative">
+            <div className="relative items-center justify-center flex flex-col items-center justify-center space-y-6">
               <img
+                className="w-50 h-50 border-4 border-gray-200"
                 src={pessoaSelecionada.fragmentoUrl || "/placeholder.svg"}
-                alt="Fragmento da pessoa"
-                className="w-200 h-200 object-cover rounded-lg border-4 border-red-200"
               />
-                  <Button onClick={() => setMostrarFotoCompleta(true)} className="bg-red-600 hover:bg-red-700 mr-4">
-                  <Eye className="w-4 h-4" />
-                  Mostrar
+              <div className="flex justify-center">
+                <Button
+                  onClick={() => setMostrarFotoCompleta(true)}
+                  className="bg-red-600 hover:bg-red-700 mt-4 w-80">
+                  <span>Mostrar</span>
                 </Button>
+              </div>  
             </div>
           </div>
         </CardContent>
