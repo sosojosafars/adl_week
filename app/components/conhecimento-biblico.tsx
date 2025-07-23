@@ -43,11 +43,14 @@ export default function ConhecimentoBiblico({ onBack }: { onBack: () => void }) 
   const [perguntaSelecionada, setPerguntaSelecionada] = useState<PerguntaBiblica | null>(null)
   const [perguntasRespondidas, setPerguntasRespondidas] = useState<Set<number>>(new Set())
   const [mostrarResposta, setMostrarResposta] = useState(false)
+    const [frasesAcertadas, setFrasesAcertadas] = useState<Set<number>>(new Set())
+  const [respostaSelecionada, setRespostaSelecionada] = useState<boolean | null>(null)
 
-  const selecionarPergunta = (pergunta: PerguntaBiblica) => {
-    if (perguntasRespondidas.has(pergunta.id)) return
-    setPerguntaSelecionada(pergunta)
+  const selecionarPergunta = (biblico: PerguntaBiblica) => {
+    if (perguntasRespondidas.has(biblico.id)) return
+    setPerguntaSelecionada(biblico)
     setMostrarResposta(false)
+    setPerguntasRespondidas(new Set([...perguntasRespondidas, biblico.id])) // Marca como respondida na seleção
   }
 
   const mostrarRespostaCerta = () => {
