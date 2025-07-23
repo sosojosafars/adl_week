@@ -29,7 +29,7 @@ const frases: Frase[] = [
     id: 3,
     texto: "Pois o amor ao dinheiro é a raiz de todos os males",
     eVerdadeira: true,
-    explicacao: "1 Timóteo ˆ:10",
+    explicacao: "1 Timóteo 6:10",
   },
   {
     id: 4,
@@ -76,41 +76,31 @@ const frases: Frase[] = [
 ]
 
 export default function TaNaBibliaOuTaAmarrado({ onBack }: { onBack: () => void }) {
-  const [perguntaAtual, setPerguntaAtual] = useState(0)
-  const [pontuacao, setPontuacao] = useState(0)
   const [fraseSelecionada, setFraseSelecionada] = useState<Frase | null>(null)
   const [frasesAcertadas, setFrasesAcertadas] = useState<Set<number>>(new Set())
   const [respostaSelecionada, setRespostaSelecionada] = useState<boolean | null>(null)
   const [mostrarResultado, setMostrarResposta] = useState(false)
-  const [jogoTerminado, setJogoTerminado] = useState(false)
 
-const frase = fraseSelecionada!
+  const frase = fraseSelecionada!
 
     const selecionarFrase = (frase: Frase) => {
     if (frasesAcertadas.has(frase.id)) return
     setFraseSelecionada(frase)
     setMostrarResposta(false)
     setRespostaSelecionada(null)
+    setFrasesAcertadas(new Set([...frasesAcertadas, frase.id]))
   }
 
   const handleResposta = (opcaoIndex: boolean) => {
      if (respostaSelecionada !== null) return
 
     setRespostaSelecionada(opcaoIndex)
-    setMostrarResposta(true)
+    setMostrarResposta(true )
 
     if (opcaoIndex === fraseSelecionada!.eVerdadeira) {
       setFrasesAcertadas(new Set([...frasesAcertadas, fraseSelecionada!.id]))
-      setPontuacao(pontuacao + 1)
     }
-  }
 
-  const reiniciarJogo = () => {
-    setPerguntaAtual(0)
-    setPontuacao(0)
-    setRespostaSelecionada(null)
-    setMostrarResposta(false)
-    setJogoTerminado(false)
   }
 
   if (!fraseSelecionada) {
