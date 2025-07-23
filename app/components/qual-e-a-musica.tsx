@@ -15,7 +15,6 @@ export default function QualEAMusica({ onBack }: { onBack: () => void }) {
   const [audioTocando, setAudioTocando] = useState<number | null>(null)
   const [tocando, setTocando] = useState(false)
 
-
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   const voltarParaGrid = () => {
@@ -172,6 +171,7 @@ useEffect(() => {
     setRespostaSelecionada(null)
     setMostrarLetraCompleta(false)
     setAudioTocando(musica.id)
+    setMusicasAcertadas(new Set([...musicasAcertadas, musica.id])) // Marca como respondida na seleção
   }
 
   // Tela principal com grid de números
