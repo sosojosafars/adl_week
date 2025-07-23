@@ -20,22 +20,22 @@ const pessoas: Piramide[] = [
 
 export default function QuemEAPessoa({ onBack }: { onBack: () => void }) {
   const [pessoaSelecionada, setPessoaSelecionada] = useState<Piramide | null>(null)
-  const [pessoasAcertadas, setPessoasAcertadas] = useState<Set<number>>(new Set())
+  const [piAcertadas, setPessoasAcertadas] = useState<Set<number>>(new Set())
   const [mostrarResposta, setMostrarResposta] = useState(false)
   const [respostaSelecionada, setRespostaSelecionada] = useState<number | null>(null)
   const [mostrarFotoCompleta, setMostrarFotoCompleta] = useState(false)
   const [pontuacao, setPontuacao] = useState(0)
 
   const [perguntaSelecionada, setPerguntaSelecionada] = useState<Piramide | null>(null)
-    const [perguntasRespondidas, setPerguntasRespondidas] = useState<Set<number>>(new Set())
+  const [perguntasRespondidas, setPerguntasRespondidas] = useState<Set<number>>(new Set())
 
-
-  const selecionarPessoa = (pessoa: Piramide) => {
-    if (pessoasAcertadas.has(pessoa.id)) return
-    setPessoaSelecionada(pessoa)
+  const selecionarPessoa = (pi: Piramide) => {
+    if (piAcertadas.has(pi.id)) return
+    setPessoaSelecionada(pi)
     setMostrarResposta(false)
     setRespostaSelecionada(null)
     setMostrarFotoCompleta(false)
+    setPessoasAcertadas(new Set([...piAcertadas, pi.id]))
   }
 
   const handleResposta = (opcaoIndex: number) => {
@@ -71,11 +71,11 @@ export default function QuemEAPessoa({ onBack }: { onBack: () => void }) {
                   key={pessoa.id}
                   onClick={() => selecionarPessoa(pessoa)}
                   className={`w-16 h-16 rounded-full border-4 flex items-center justify-center text-xl font-bold transition-all hover:scale-110 ${
-                    pessoasAcertadas.has(pessoa.id)
+                    piAcertadas.has(pessoa.id)
                       ? "bg-green-500 text-white border-green-600 shadow-lg"
                       : "bg-white text-yellow-800 border-yellow-400 hover:border-yellow-600 hover:text-yellow-600"
                   }`}
-                  disabled={pessoasAcertadas.has(pessoa.id)}
+                  disabled={piAcertadas.has(pessoa.id)}
                 >
                   {pessoa.id}
                 </button>
